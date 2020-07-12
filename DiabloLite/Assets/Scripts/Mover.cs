@@ -8,7 +8,6 @@ using UnityEngine.Internal;
 public class Mover : MonoBehaviour
 {
     /* fields for this class */
-    [SerializeField]    Transform       target;
     private             NavMeshAgent    navMesh;
 
     void Awake()
