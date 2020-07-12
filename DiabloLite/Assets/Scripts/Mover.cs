@@ -9,6 +9,7 @@ public class Mover : MonoBehaviour
     /* fields for this class */
     [SerializeField]    Transform       target;
     private             NavMeshAgent    navMesh;
+    private             Ray             lastRay;
 
     void Awake()
     {
@@ -18,6 +19,11 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navMesh.destination = target.position;
+        if(Input.GetMouseButtonDown(0))
+        {
+            lastRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            navMesh.destination = target.position;
+        }
+        Debug.DrawRay(lastRay.origin, lastRay.direction * 100f);
     }
 }
