@@ -19,6 +19,5 @@ public class Mover : MonoBehaviour
     void Update()
     {
         navMesh.destination = target.position;
-        // navMesh.SetDestination(target.position); // same
     }
 }
