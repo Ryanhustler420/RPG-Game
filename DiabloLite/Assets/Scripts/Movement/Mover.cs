@@ -1,38 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Internal;
 
 public class Mover : MonoBehaviour
 {
-    /* fields for this class */
-    private             NavMeshAgent    navMesh;
-
-    void Awake()
-    {
-        navMesh = GetComponent<NavMeshAgent>();
-    }
 
     void Update()
     {
-        if(Input.GetMouseButton(0))
-        {
-            MoveToCursor();
-        }
         UpdateAnimator();
     }
 
-    private void MoveToCursor()
+    public void MoveTo(Vector3 desctination)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(ray, out hit);
-        if(hasHit)
-        {
-            navMesh.destination = hit.point;
-        }
+        GetComponent<NavMeshAgent>().destination = desctination;
     }
 
     private void UpdateAnimator()
@@ -45,7 +24,7 @@ public class Mover : MonoBehaviour
         // so we need to convert that vactor3 into local vector3
 
         // want to get vector3 from navMash which has already direction and speed.
-        Vector3 velocity = navMesh.velocity;
+        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
         // convert that to local velocity, which helps our animator blend tree to understand where the speed decreases.
         Vector3 localVelocity = transform.InverseTransformDirection(velocity);
         // get the forward or (z) direction speed,
